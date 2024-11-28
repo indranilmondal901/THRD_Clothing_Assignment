@@ -67,7 +67,6 @@ const App = () => {
       .filter((sp) => purchased.some((se) => sp.ProductID === se.ProductID))
       .map((sp) => sp.Category);
     purchasedCategory = [...new Set(purchasedCategory)];
-    // console.log(purchasedCategory);
 
     return {
       notPurchased: notPurchased.sort((a, b) => {
@@ -85,13 +84,12 @@ const App = () => {
       ),
     };
   };
-  const { notPurchased, purchased, recomandedProducts } = categorizedProducts();
-  
+  const { notPurchased, purchased, recomandedProducts } = categorizedProducts();  
 
   return (
     <Router>
       <div className="app-container">
-        <Header user={user} setUser={setUser} cartData={cartData}/>
+        <Header user={user} setUser={setUser} cartData={cartData} setCartData={setCartData} />
         <div className="main-content">
           <Routes>
             {/* Public Routes */}

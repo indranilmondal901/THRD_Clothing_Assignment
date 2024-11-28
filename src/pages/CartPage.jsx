@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/CartPage.css";
 import { useNavigate } from "react-router-dom";
 
 const CartPage = ({ cartData, setCartData }) => {
+  const [totalCartItems, setTotalCartItems] = useState(0);
+
   const navigate = useNavigate();
 
   const incrementQuantity = (productID) => {
@@ -36,12 +38,16 @@ const CartPage = ({ cartData, setCartData }) => {
     0
   );
 
-console.log({totalCost});
+  useEffect(()=>{
+    const totalItems = cartData.reduce((sum, item) => sum + item.Quantity, 0);
+    setTotalCartItems(totalItems);
+  },[cartData]);
+
   return (
     <div className="shopping-cart">
       <div className="cart-items">
         <h2>Shopping Cart</h2>
-        <p>{cartData.length} Items</p>
+        <p>{totalCartItems} Items</p>
 
         <table className="cart-table">
           <thead>
@@ -89,11 +95,12 @@ console.log({totalCost});
 
       <div className="order-summary">
         <h2>Order Summary</h2>
-        <p>Items: {cartData.length}</p>
-        <p>Shipping: Standard Delivery - Rs.5.00</p>
-        <p>Promo Code:</p>
+        <p>Items: {totalCartItems}</p>
+        <p>Cart Value - Rs. {totalCost}</p>
+        <p>Shipping: Standard Delivery - Rs. 5.00</p>
+        {/* <p>Promo Code:</p>
         <input type="text" placeholder="Enter your code" />
-        <button>Apply</button>
+        <button>Apply</button> */}
         <h3>Total Cost: Rs.{(totalCost + 5).toFixed(2)}</h3>
         <button className="checkout-button">Checkout</button>
       </div>

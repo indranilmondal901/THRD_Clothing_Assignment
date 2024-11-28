@@ -3,11 +3,12 @@ import "../style/Header.css";
 import { FaHome, FaShoppingBag, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ user ,setUser, cartData }) => {
+const Header = ({ user ,setUser, cartData, setCartData }) => {
   const [totalCartItems, setTotalCartItems] = useState(0);
   const navigate = useNavigate();
   const logoutHandler = () => {
     setUser(null);
+    setCartData([]);
   };
   useEffect(()=>{
     const totalItems = cartData.reduce((sum, item) => sum + item.Quantity, 0);
@@ -51,19 +52,6 @@ const Header = ({ user ,setUser, cartData }) => {
               </span>
             </li>
 
-            {/* Cart */}
-            <li className="nav-item">
-              <span
-                className="nav-link"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                onClick={()=> navigate("/cart")}
-              >
-                <FaShoppingBag className="me-1" />
-                Cart {totalCartItems > 0 && <span className="round-span" >{totalCartItems || 0}</span>}
-              </span>
-            </li>
-
             {/* Product */}
             <li className="nav-item">
               <span
@@ -77,6 +65,19 @@ const Header = ({ user ,setUser, cartData }) => {
               </span>
             </li>
 
+            {/* Cart */}
+            <li className="nav-item">
+              <span
+                className="nav-link"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                onClick={()=> navigate("/cart")}
+              >
+                <FaShoppingBag className="me-1" />
+                Cart {totalCartItems > 0 && <span className="round-span" >{totalCartItems || 0}</span>}
+              </span>
+            </li>            
+
             {/* User */}
             {user && (
               <li className="nav-item">
@@ -86,7 +87,7 @@ const Header = ({ user ,setUser, cartData }) => {
                   data-bs-target="#navbarNav"
                 >
                   <FaUser className="me-1" />
-                  User
+                  {user && user.Username ? <span className="userName" style={{color:"red"}}>{user.Username}</span> : "User"}
                 </span>
               </li>
             )}
