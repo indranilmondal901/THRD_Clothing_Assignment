@@ -53,6 +53,7 @@ const Header = ({ user ,setUser, cartData, setCartData }) => {
             </li>
 
             {/* Product */}
+            {user && user.UserID && (
             <li className="nav-item">
               <span
                 className="nav-link"
@@ -63,7 +64,7 @@ const Header = ({ user ,setUser, cartData, setCartData }) => {
                 <FaShoppingBag className="me-1" />
                 Product
               </span>
-            </li>
+            </li>)}
 
             {/* Cart */}
             <li className="nav-item">

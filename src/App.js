@@ -84,12 +84,17 @@ const App = () => {
       ),
     };
   };
-  const { notPurchased, purchased, recomandedProducts } = categorizedProducts();  
+  const { notPurchased, purchased, recomandedProducts } = categorizedProducts();
 
   return (
     <Router>
       <div className="app-container">
-        <Header user={user} setUser={setUser} cartData={cartData} setCartData={setCartData} />
+        <Header
+          user={user}
+          setUser={setUser}
+          cartData={cartData}
+          setCartData={setCartData}
+        />
         <div className="main-content">
           <Routes>
             {/* Public Routes */}
@@ -103,25 +108,60 @@ const App = () => {
                 )
               }
             />
+            {/*Home*/}
+            <Route
+              path="/"
+              element={
+                <HomePage
+                  user={user}
+                  notPurchased={notPurchased}
+                  purchased={purchased}
+                  products={products}
+                  recomandedProducts={recomandedProducts}
+                  cartData={cartData}
+                  setCartData={setCartData}
+                />
+              }
+            />
 
             {/* Protected Routes */}
             {user ? (
               <>
-                <Route
+                {/* <Route
                   path="/"
                   element={
                     <HomePage
                       user={user}
                       notPurchased={notPurchased}
                       purchased={purchased}
+                      products={products}
                       recomandedProducts={recomandedProducts}
                       cartData={cartData}
                       setCartData={setCartData}
                     />
                   }
+                /> */}
+                <Route
+                  path="/products"
+                  element={
+                    <ProductPage
+                      user={user}
+                      products={[...notPurchased, ...purchased]}
+                      cartData={cartData}
+                      setCartData={setCartData}
+                    />
+                  }
                 />
-                <Route path="/products" element={<ProductPage user={user} products={products} cartData={cartData} setCartData={setCartData}/>} />
-                <Route path="/cart" element={<CartPage user={user} cartData={cartData} setCartData={setCartData}/>} />
+                <Route
+                  path="/cart"
+                  element={
+                    <CartPage
+                      user={user}
+                      cartData={cartData}
+                      setCartData={setCartData}
+                    />
+                  }
+                />
               </>
             ) : (
               <Route path="*" element={<Navigate to="/login" />} />

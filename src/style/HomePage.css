@@ -1,147 +1,253 @@
-/*--------HOME------------*/
-/* Banner Section */
-.banner {
-  height: 300px;
-  background-image: url("https://via.placeholder.com/1500x300"); /* Replace with actual image */
-  background-size: cover;
-  background-position: center;
-  margin-bottom: 20px;
-  position: relative;
+/* HomePage Styles */
+/* body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+} */
+
+.homepage {
+  width: 100%;
 }
 
-.banner::after {
+/* Hero Section */
+.hero {
+  position: relative;
+  background-image: url("/public/banner.jpg");/*https://via.placeholder.com/1920x600*/
+  background-size: cover;
+  background-position: center;
+  height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
-/*Recommendation Section*/
-.recomandation-section {
-  padding: 40px 20px;
-  background-color: #fff;
+.hero-content {
+  z-index: 1;
 }
 
-.product-block-heading {
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.shop-now-btn,
+.view-cart-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.shop-now-btn {
+  background: #007bff;
+  color: white;
+  border-radius: 30px;
+}
+
+.shop-now-btn:hover {
+  background: #0056b3;
+}
+
+.view-cart-btn {
+  background: #ffc107;
+  color: black;
+  border-radius: 30px;
+}
+
+.view-cart-btn:hover {
+  background: #e0a800;
+}
+
+/* Recommendations Section */
+.recommendations {
+  padding: 3rem 1.5rem;
+  background: #ffffff;
+}
+
+.section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
-.product-block-heading h5 {
-  margin: 0;
-  color: #333;
+.section-header h2 {
+  font-size: 1.8rem;
 }
 
-.product-block-heading span {
+.section-header span {
   font-size: 1rem;
   color: #007bff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.section-header span:hover {
+  color: #0056b3;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 1.5rem;
 }
 
 /* Explore Section */
-.explore-section {
-  background-color: #f9f9f9;
-  padding: 40px 20px;
+.explore {
+  padding: 3rem 1.5rem;
+  background: #f7f7f7;
 }
 
-.product-block-heading {
+.explore-swiper {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .shop-now-btn,
+  .view-cart-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+/* Welcome Section for Guests */
+.welcome-guest {
+  text-align: center;
+  padding: 50px 20px;
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+}
+
+.guest-content h2 {
+  font-size: 2.5rem;
+  color: #343a40;
+}
+
+.guest-content p {
+  margin: 15px 0;
+  color: #6c757d;
+  font-size: 1.2rem;
+}
+
+.create-account-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.create-account-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Featured Products Section */
+.featured-products {
+  padding: 50px 20px;
+  background: #fff;
+}
+
+.featured-products .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.explore-section .mySwiper {
-  padding-top: 30px;
-  padding-bottom: 30px;
+.featured-products .section-header h2 {
+  font-size: 2rem;
+  color: #343a40;
 }
 
-.swiper-slide {
-  display: flex;
-  justify-content: center;
+.featured-products .section-header span {
+  font-size: 1rem;
+  color: #007bff;
+  cursor: pointer;
 }
 
-/* Swiper Styling  */
-.mySwiper {
-  position: relative;
-  z-index: 0;
+.featured-products .grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }
 
-.swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 10px;
-  transition: transform 0.3s ease-in-out;
-}
-
-.swiper-slide:hover {
-  transform: scale(1.05);
-}
-
-/* Swiper Navigation */
-.swiper-button-next,
-.swiper-button-prev {
-  background-color: #007bff;
+/* Call to Action Section */
+.call-to-action {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(to right, #007bff, #0056b3);
   color: #fff;
-  border-radius: 50%;
-  padding: 10px;
 }
 
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
+.call-to-action h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.call-to-action p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.join-now-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.join-now-btn:hover {
   background-color: #0056b3;
+  color: #fff;
 }
 
-/* Swiper Pagination */
-.swiper-pagination-bullet {
-  background-color: #007bff;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: #0056b3;
-}
-
-@media (max-width: 768px) {
-  /* Mobile responsiveness */
-  .grid-container {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .swiper-button-next,
-  .swiper-button-prev {
-    padding: 8px;
-  }
-
-  .swiper-slide {
-    padding: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  /* Mobile responsiveness */
-  .grid-container {
-    grid-template-columns: 1fr;
-  }
-
-  .product-block-heading h5 {
-    font-size: 1rem;
-  }
-
-  .product-block-heading span {
-    font-size: 0.8rem;
-  }
-}
