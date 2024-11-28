@@ -17,6 +17,7 @@ const Header = ({ user, setUser, cartData, setCartData }) => {
   const logoutHandler = () => {
     setUser(null);
     setCartData([]);
+    navigate("/login");
   };
 
   useEffect(() => {
