@@ -18,16 +18,20 @@ const CartPage = ({ cartData, setCartData }) => {
   };
 
   const decrementQuantity = (productID) => {
-    setCartData((prev) =>
-      prev
-        .map((item) =>
-          item.ProductID === productID && item.Quantity > 1
-            ? { ...item, Quantity: item.Quantity - 1 }
-            : item
-        )
-        .filter((item) => item.Quantity > 0)
+    setCartData((prevCart) =>
+      prevCart
+        .map((item) => {
+          if (item.ProductID === productID) {
+            return item.Quantity > 1 
+              ? { ...item, Quantity: item.Quantity - 1 } 
+              : null;
+          }
+          return item;
+        })
+        .filter(Boolean)
     );
   };
+  
 
   const removeProduct =(productID)=>{
     setCartData((prev) =>prev.filter((item) => item.ProductID !== productID));

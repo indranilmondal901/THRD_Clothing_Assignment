@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
 import "../style/Header.css";
-import { FaHome, FaShoppingBag, FaUser, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaHome,
+  FaShoppingBag,
+  FaUser,
+  FaSignOutAlt,
+  FaSignInAlt,
+} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ user ,setUser, cartData, setCartData }) => {
+const Header = ({ user, setUser, cartData, setCartData }) => {
   const [totalCartItems, setTotalCartItems] = useState(0);
   const navigate = useNavigate();
   const logoutHandler = () => {
     setUser(null);
     setCartData([]);
   };
-  useEffect(()=>{
+  useEffect(() => {
     const totalItems = cartData.reduce((sum, item) => sum + item.Quantity, 0);
     setTotalCartItems(totalItems);
-  },[cartData])
+  }, [cartData]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar">
@@ -45,7 +51,7 @@ const Header = ({ user ,setUser, cartData, setCartData }) => {
                 className="nav-link"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarNav"
-                onClick={()=> navigate("/")}
+                onClick={() => navigate("/")}
               >
                 <FaHome className="me-1" />
                 Home
@@ -54,30 +60,36 @@ const Header = ({ user ,setUser, cartData, setCartData }) => {
 
             {/* Product */}
             {user && user.UserID && (
-            <li className="nav-item">
-              <span
-                className="nav-link"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                onClick={()=> navigate("/products")}
-              >
-                <FaShoppingBag className="me-1" />
-                Product
-              </span>
-            </li>)}
+              <li className="nav-item">
+                <span
+                  className="nav-link"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav"
+                  onClick={() => navigate("/products")}
+                >
+                  <FaShoppingBag className="me-1" />
+                  Product
+                </span>
+              </li>
+            )}
 
             {/* Cart */}
-            <li className="nav-item">
-              <span
-                className="nav-link"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                onClick={()=> navigate("/cart")}
-              >
-                <FaShoppingBag className="me-1" />
-                Cart {totalCartItems > 0 && <span className="round-span" >{totalCartItems || 0}</span>}
-              </span>
-            </li>            
+            {user && user.UserID && (
+              <li className="nav-item">
+                <span
+                  className="nav-link"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav"
+                  onClick={() => navigate("/cart")}
+                >
+                  <FaShoppingBag className="me-1" />
+                  Cart{" "}
+                  {totalCartItems > 0 && (
+                    <span className="round-span">{totalCartItems || 0}</span>
+                  )}
+                </span>
+              </li>
+            )}
 
             {/* User */}
             {user && (
@@ -88,21 +100,39 @@ const Header = ({ user ,setUser, cartData, setCartData }) => {
                   data-bs-target="#navbarNav"
                 >
                   <FaUser className="me-1" />
-                  {user && user.Username ? <span className="userName" style={{color:"red"}}>{user.Username}</span> : "User"}
+                  {user && user.Username ? (
+                    <span className="userName" style={{ color: "red" }}>
+                      {user.Username}
+                    </span>
+                  ) : (
+                    "User"
+                  )}
                 </span>
               </li>
             )}
             {/* Logout (Only if user exists) */}
-            {user && (
+            {user ? (
               <li className="nav-item">
                 <span
                   className="nav-link"
                   data-bs-toggle="collapse"
                   data-bs-target="#navbarNav"
-                  onClick={()=>logoutHandler()}
+                  onClick={() => logoutHandler()}
                 >
                   <FaSignOutAlt className="me-1" />
                   Logout
+                </span>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <span
+                  className="nav-link"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarNav"
+                  onClick={() => navigate("/login")}
+                >
+                  <FaSignInAlt className="me-1" />
+                  LogIn
                 </span>
               </li>
             )}
