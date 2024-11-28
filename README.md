@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# E-Commerce React Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Implementation Details:
 
-## Available Scripts
+### Approach:
+  - The application is built using React to create a dynamic and interactive e-commerce platform.
+  - Components are created in a modular fashion to ensure reusability and maintainability.
+  - State management is handled using React's `useState` hook.
+  - Side effects, such as filtering products and updating the cart, are managed using `useEffect`.
 
-In the project directory, you can run:
+### Product Display Logic:
+  - **Product Data Source**:
+    - Products are fetched from a CSV file that contains all available products.
+    - The purchase history of each user is tracked using their `userID` to filter previously purchased products.
+    - The list of products is dynamically ordered by placing **not purchased** products first, followed by **purchased** products.
+    - This dynamic ordering ensures that the most relevant products (not purchased yet) are always shown first.
 
-### `npm start`
+  - **HomePage**:
+    - On login, the app fetches the user’s purchase history by filtering the products based on their `userID`.And based on the previous purchased category **handpicked products** are shown.
+    - **Not purchased products** are listed after that and shown in carosal as **Explore Our Store**.
+    - The products are displayed in two sections:
+      - **Hand-picked Recommendations**: Displayed from the `recomandedProducts` list.
+      - **Explore Our Store**: Displays a swiper carousel of products that have not been purchased.
+      
+    - This order is achieved using the following approach:
+      - The list is filtered by comparing the `userID` with the purchase history.
+      - Products that are not purchased are dynamically placed at the beginning of the list, followed by the purchased products.
+      - The final product list is a combination of both: **`[...notPurchased, ...purchased]`**.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  - **ProductPage**:
+    - Filters are available for searching products by name, category, and price range.
+    - After applying filters, the products are dynamically updated and displayed in the correct order (not purchased first, purchased last).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+  - **CartPage**:
+    - Products added to the cart are displayed with options to modify the quantity or remove them.
+    - Cart contents are updated in real-time when products are added, removed, or their quantities change.
+    - The total price is recalculated and displayed based on the cart data.
 
-### `npm test`
+### Additional Features:
+  - **Swiper Carousel**:
+    - Integrated a swiper carousel to display rotating product selections, providing an engaging user experience.
+    - The carousel is built using the `Swiper` component, supporting free mode, autoplay, and pagination features.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - **User Authentication**:
+    - Differentiates between logged-in users and guests.
+    - Logged-in users receive personalized product recommendations, while guests are shown a welcome section with a sign-up prompt.
 
-### `npm run build`
+  - **Filter Reset**:
+    - Filters are available for searching products by name, category, and price range.
+    - Includes a "Clear All" button to reset the search, category, and price range filters, allowing users to start with a fresh product list.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - **Responsive Design**:
+    - The layout is responsive, ensuring a consistent user experience across different screen sizes, such as desktop, tablet, and mobile.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  - **Product Data Management**:
+    - Product data is managed locally using React state hooks (`useState`).
+    - In a production environment, this would be replaced with API calls to fetch data from a backend or third-party service.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - **Lazy Loading**:
+    - Implemented lazy loading for product images and other content to enhance page load time and performance.
+    - Images are loaded only when they come into the viewport, reducing initial page load time and saving bandwidth.
