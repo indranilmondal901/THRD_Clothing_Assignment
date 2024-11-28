@@ -91,7 +91,7 @@ const App = () => {
   return (
     <Router>
       <div className="app-container">
-        <Header user={user} setUser={setUser} />
+        <Header user={user} setUser={setUser} cartData={cartData}/>
         <div className="main-content">
           <Routes>
             {/* Public Routes */}
@@ -122,8 +122,8 @@ const App = () => {
                     />
                   }
                 />
-                <Route path="/products" element={<ProductPage user={user} />} />
-                <Route path="/cart" element={<CartPage user={user} cartData={cartData}/>} />
+                <Route path="/products" element={<ProductPage user={user} products={products} cartData={cartData} setCartData={setCartData}/>} />
+                <Route path="/cart" element={<CartPage user={user} cartData={cartData} setCartData={setCartData}/>} />
               </>
             ) : (
               <Route path="*" element={<Navigate to="/login" />} />

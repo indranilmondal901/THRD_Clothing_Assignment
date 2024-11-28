@@ -1,4 +1,5 @@
 import React from "react";
+import "../style/HomePage.css";
 import ProductCard from "../components/ProductCard";
 
 /* ----------------------------- swipper --------------------------------------------- */
