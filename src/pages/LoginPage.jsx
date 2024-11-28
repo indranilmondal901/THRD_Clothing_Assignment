@@ -9,7 +9,7 @@ const LoginPage = ({ onLoginSuccess }) => {
   const [error, setError] = useState("");
 
   const handleLogin = (e) => {
-    e.preventDefault(); // Prevent form default submission behavior
+    e.preventDefault();
     Papa.parse(usersCSV, {
       header: true,
       download: true,

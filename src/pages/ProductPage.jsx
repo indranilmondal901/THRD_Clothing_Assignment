@@ -3,7 +3,7 @@ import "../style/Productpage.css";
 import ProductCard from "../components/ProductCard";
 
 const ProductPage = ({products,cartData, setCartData}) => {
-  console.log(products);
+  // console.log(products);
   const [search, setSearch] = useState("");
   const [Category, setCategory] = useState("");
   const [PriceRange, setPriceRange] = useState([0, 10000]);
@@ -74,7 +74,7 @@ const ProductPage = ({products,cartData, setCartData}) => {
         {filteredProducts.length > 0 ? (
           <div className="products">
             {filteredProducts.map((product) => (
-              <ProductCard product={product} cartData={cartData} setCartData={setCartData}/>
+              <ProductCard key={product.ProductID} product={product} cartData={cartData} setCartData={setCartData}/>
             ))}
           </div>
         ) : (

@@ -11,48 +11,57 @@ import { useNavigate } from "react-router-dom";
 
 const Header = ({ user, setUser, cartData, setCartData }) => {
   const [totalCartItems, setTotalCartItems] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+
   const logoutHandler = () => {
     setUser(null);
     setCartData([]);
   };
+
   useEffect(() => {
     const totalItems = cartData.reduce((sum, item) => sum + item.Quantity, 0);
     setTotalCartItems(totalItems);
   }, [cartData]);
 
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar">
       <div className="container-fluid">
         {/* Logo */}
-        <s className="navbar-brand" href="/">
+        <span className="navbar-brand" onClick={() => navigate("/")}>
           Shopping Store
-        </s>
+        </span>
 
         {/* Toggle Button for Mobile View */}
         <button
           className="navbar-toggler"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
+          aria-expanded={isMenuOpen}
           aria-label="Toggle navigation"
+          onClick={toggleMenu}
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
         {/* Navbar Links */}
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div
+          className={`collapse navbar-collapse ${
+            isMenuOpen ? "show" : ""
+          }`}
+          id="navbarNav"
+        >
           <ul className="navbar-nav ms-auto">
             {/* Home */}
             <li className="nav-item">
-              <span
-                className="nav-link"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                onClick={() => navigate("/")}
-              >
+              <span className="nav-link" onClick={() => { navigate("/"); closeMenu(); }}>
                 <FaHome className="me-1" />
                 Home
               </span>
@@ -63,9 +72,7 @@ const Header = ({ user, setUser, cartData, setCartData }) => {
               <li className="nav-item">
                 <span
                   className="nav-link"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNav"
-                  onClick={() => navigate("/products")}
+                  onClick={() => { navigate("/products"); closeMenu(); }}
                 >
                   <FaShoppingBag className="me-1" />
                   Product
@@ -78,9 +85,7 @@ const Header = ({ user, setUser, cartData, setCartData }) => {
               <li className="nav-item">
                 <span
                   className="nav-link"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNav"
-                  onClick={() => navigate("/cart")}
+                  onClick={() => { navigate("/cart"); closeMenu(); }}
                 >
                   <FaShoppingBag className="me-1" />
                   Cart{" "}
@@ -94,13 +99,9 @@ const Header = ({ user, setUser, cartData, setCartData }) => {
             {/* User */}
             {user && (
               <li className="nav-item">
-                <span
-                  className="nav-link"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNav"
-                >
+                <span className="nav-link">
                   <FaUser className="me-1" />
-                  {user && user.Username ? (
+                  {user.Username ? (
                     <span className="userName" style={{ color: "red" }}>
                       {user.Username}
                     </span>
@@ -110,14 +111,13 @@ const Header = ({ user, setUser, cartData, setCartData }) => {
                 </span>
               </li>
             )}
-            {/* Logout (Only if user exists) */}
+
+            {/* Logout */}
             {user ? (
               <li className="nav-item">
                 <span
                   className="nav-link"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNav"
-                  onClick={() => logoutHandler()}
+                  onClick={() => { logoutHandler(); closeMenu(); }}
                 >
                   <FaSignOutAlt className="me-1" />
                   Logout
@@ -127,9 +127,7 @@ const Header = ({ user, setUser, cartData, setCartData }) => {
               <li className="nav-item">
                 <span
                   className="nav-link"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNav"
-                  onClick={() => navigate("/login")}
+                  onClick={() => { navigate("/login"); closeMenu(); }}
                 >
                   <FaSignInAlt className="me-1" />
                   LogIn
