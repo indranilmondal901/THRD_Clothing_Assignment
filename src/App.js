@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import React, { useState, useEffect, Suspense, lazy } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import LoginPage from "./pages/LoginPage";
-import HomePage from "./pages/HomePage";
-import ProductPage from "./pages/ProductPage";
-import CartPage from "./pages/CartPage";
-
 import Papa from "papaparse";
 import productsCSV from "./data/products.csv";
 import purchasesCSV from "./data/purchase_history.csv";
+
+// Lazy-loaded components
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const ProductPage = lazy(() => import("./pages/ProductPage"));
+const CartPage = lazy(() => import("./pages/CartPage"));
 
 const App = () => {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [purchasedProducts, setPurchasedProducts] = useState([]);
-
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
@@ -50,7 +45,6 @@ const App = () => {
     }
   }, [user]);
 
-  // Filter products
   const categorizedProducts = () => {
     const purchased = [];
     const notPurchased = [];
@@ -84,6 +78,7 @@ const App = () => {
       ),
     };
   };
+
   const { notPurchased, purchased, recomandedProducts } = categorizedProducts();
 
   return (
@@ -96,77 +91,66 @@ const App = () => {
           setCartData={setCartData}
         />
         <div className="main-content">
-          <Routes>
-            {/* Public Routes */}
-            <Route
-              path="/login"
-              element={
-                !user ? (
-                  <LoginPage onLoginSuccess={setUser} />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-            {/*Home*/}
-            <Route
-              path="/"
-              element={
-                <HomePage
-                  user={user}
-                  notPurchased={notPurchased}
-                  purchased={purchased}
-                  products={products}
-                  recomandedProducts={recomandedProducts}
-                  cartData={cartData}
-                  setCartData={setCartData}
-                />
-              }
-            />
+          {/* Use Suspense for Lazy Loading */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              {/* Public Routes */}
+              <Route
+                path="/login"
+                element={
+                  !user ? (
+                    <LoginPage onLoginSuccess={setUser} />
+                  ) : (
+                    <Navigate to="/" />
+                  )
+                }
+              />
+              {/* Home */}
+              <Route
+                path="/"
+                element={
+                  <HomePage
+                    user={user}
+                    notPurchased={notPurchased}
+                    purchased={purchased}
+                    products={products}
+                    recomandedProducts={recomandedProducts}
+                    cartData={cartData}
+                    setCartData={setCartData}
+                  />
+                }
+              />
 
-            {/* Protected Routes */}
-            {user ? (
-              <>
-                {/* <Route
-                  path="/"
-                  element={
-                    <HomePage
-                      user={user}
-                      notPurchased={notPurchased}
-                      purchased={purchased}
-                      products={products}
-                      recomandedProducts={recomandedProducts}
-                      cartData={cartData}
-                      setCartData={setCartData}
-                    />
-                  }
-                /> */}
-                <Route
-                  path="/products"
-                  element={
-                    <ProductPage
-                      user={user}
-                      products={[...notPurchased, ...purchased]}
-                      cartData={cartData}
-                      setCartData={setCartData}
-                    />
-                  }
-                />
-                <Route
-                  path="/cart"
-                  element={
-                    <CartPage
-                      user={user}
-                      cartData={cartData}
-                      setCartData={setCartData}
-                    />
-                  }
-                />
-              </>
-            ) : (
-              <Route path="*" element={<Navigate to="/login" />} />
-            )}
-          </Routes>
+              {/* Protected Routes */}
+              {user ? (
+                <>
+                  <Route
+                    path="/products"
+                    element={
+                      <ProductPage
+                        user={user}
+                        products={[...notPurchased, ...purchased]}
+                        cartData={cartData}
+                        setCartData={setCartData}
+                      />
+                    }
+                  />
+                  <Route
+                    path="/cart"
+                    element={
+                      <CartPage
+                        user={user}
+                        cartData={cartData}
+                        setCartData={setCartData}
+                      />
+                    }
+                  />
+                </>
+              ) : (
+                <Route path="*" element={<Navigate to="/login" />} />
+              )}
+            </Routes>
+          </Suspense>
         </div>
         <Footer />
       </div>
