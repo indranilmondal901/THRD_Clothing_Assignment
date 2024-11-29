@@ -9,6 +9,9 @@
 
 ### Approach:
   - The application is built using React to create a dynamic and interactive e-commerce platform.
+  - *"papaparse"* is used to parse CSV files and load Data.
+  - *"bootstrap"* is used for styling purposes.
+  - *"swiper"* is used for carosal effect.
   - Components are created in a modular fashion to ensure reusability and maintainability.
   - State management is handled using React's `useState` hook.
   - Side effects, such as filtering products and updating the cart, are managed using `useEffect`.

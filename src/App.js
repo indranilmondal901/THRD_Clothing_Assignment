@@ -91,7 +91,7 @@ const App = () => {
           setCartData={setCartData}
         />
         <div className="main-content">
-          {/* Use Suspense for Lazy Loading */}
+          {/* Suspense for Lazy Loading */}
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               {/* Public Routes */}
