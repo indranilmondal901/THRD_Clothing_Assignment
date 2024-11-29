@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "../style/LoginPage.css";
 import Papa from "papaparse";
 import usersCSV from "../data/users.csv";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginPage = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
   const handleLogin = (e) => {
@@ -38,13 +40,22 @@ const LoginPage = ({ onLoginSuccess }) => {
           onChange={(e) => setUsername(e.target.value)}
           className="login-input"
         />
+        <div className="password-container">
         <input
-          type="password"
-          placeholder="Password"
+          type={showPassword ? "Password" : "text"}
+          placeholder= "Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="login-input"
         />
+        <span
+          // type="button"
+          className="toggle-password-button"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? <FaEyeSlash /> : <FaEye />}
+        </span>
+        </div>
         <button type="submit" className="login-button">
           Login
         </button>

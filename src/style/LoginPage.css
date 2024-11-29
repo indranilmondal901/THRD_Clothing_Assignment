@@ -10,14 +10,14 @@
 
 .login-title {
   font-size: 2rem;
-  /* margin-bottom: 20px; */
-  /* color: #333; */
+  margin-bottom: 1rem;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
   width: 80%;
+  max-width: 400px;
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -25,11 +25,39 @@
 }
 
 .login-input {
+  width: 100%;
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.password-container .login-input {
+  padding-right: 40px; /* Space for the eye icon */
+}
+
+.toggle-password-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  font-size: 1.2rem;
+}
+
+.toggle-password-button:hover {
+  color: #333;
 }
 
 .login-button {
