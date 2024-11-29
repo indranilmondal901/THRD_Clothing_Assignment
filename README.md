@@ -1,3 +1,8 @@
+# Github URL
+  [click to view code in my github](https://github.com/indranilmondal901/thrd_clothing_assignment)
+# Deployed URL
+  [click to view the demo](https://thrd-clothing-assignment-indranilmondal901s-projects.vercel.app/)
+
 # E-Commerce React Application
 
 ## Implementation Details:
@@ -59,7 +64,3 @@
   - **Lazy Loading**:
     - Implemented lazy loading for product images and other content to enhance page load time and performance.
     - Images are loaded only when they come into the viewport, reducing initial page load time and saving bandwidth.
-
-    ----------------------------------------------------------------
-    # Github URL
-    [click to view code in my github](https://github.com/indranilmondal901/thrd_clothing_assignment)

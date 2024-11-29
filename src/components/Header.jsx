@@ -103,7 +103,7 @@ const Header = ({ user, setUser, cartData, setCartData }) => {
                 <span className="nav-link">
                   <FaUser className="me-1" />
                   {user.Username ? (
-                    <span className="userName" style={{ color: "red" }}>
+                    <span className="userName" style={{ background:"#fff",color:"#333" }}>
                       {user.Username}
                     </span>
                   ) : (

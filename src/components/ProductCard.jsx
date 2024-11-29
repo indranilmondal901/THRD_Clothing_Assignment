@@ -46,11 +46,11 @@ const ProductCard = ({ product, cartData, setCartData }) => {
       </div>
 
         {cartQuantity === 0 && (
-          <div className="cart-actions">
-          <button onClick={() => updateCart(product, 1)} className="add-button" style={{backgroundColor:"#0056b3",color:"#fff"}}>
+          // <div className="cart-actions">
+          <button onClick={() => updateCart(product, 1)} className="add-to-cart-button">
             {/* <FaPlus /><FaShoppingBag />*/}<FaShoppingBag /> {" "} Add To Cart
           </button>
-          </div>
+          // </div>
         )}
 
         {cartQuantity > 0 && (
@@ -62,7 +62,7 @@ const ProductCard = ({ product, cartData, setCartData }) => {
               <FaPlus /> {/* Add To Cart */}
             </button>
             <div className="cart-summary">
-              {/*<FaShoppingBag />*/} <span>{cartQuantity}</span>
+              {/* <FaShoppingBag /> */}<span style={{color:"#333"}}>{cartQuantity}</span>
             </div>
             <button
               onClick={() => updateCart(product, -1)}

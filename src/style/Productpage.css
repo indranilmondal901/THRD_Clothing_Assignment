@@ -55,15 +55,17 @@ body {
   .clear-filters {
     width: 100%;
     padding: 10px;
-    background-color: #ff4c4c;
-    color: #fff;
-    border: none;
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #333;
     border-radius: 4px;
     cursor: pointer;
   }
   
   .clear-filters:hover {
-    background-color: #d43d3d;
+    background-color: #333;
+    color: #fff;
+    border: none;
   }
   
   /* Product List Section */
