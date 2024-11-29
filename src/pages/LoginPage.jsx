@@ -42,7 +42,7 @@ const LoginPage = ({ onLoginSuccess }) => {
         />
         <div className="password-container">
         <input
-          type={showPassword ? "Password" : "text"}
+          type={!showPassword ? "Password" : "text"}
           placeholder= "Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -53,7 +53,7 @@ const LoginPage = ({ onLoginSuccess }) => {
           className="toggle-password-button"
           onClick={() => setShowPassword(!showPassword)}
         >
-          {showPassword ? <FaEyeSlash /> : <FaEye />}
+          {!showPassword ? <FaEyeSlash /> : <FaEye />}
         </span>
         </div>
         <button type="submit" className="login-button">
